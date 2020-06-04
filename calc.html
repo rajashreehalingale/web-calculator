@@ -1,91 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
 <head>
+    <script src="calc.js"></script>
+    <link rel="stylesheet" href="calc.css">
     <title>Worlds Best Title Tag</title>
     <!-- from https://www.bootstrapcdn.com/ -->
     <!--- see also https://getbootstrap.com/docs/4.0/getting-started/download/ -->
-    <link
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-        crossorigin="anonymous"
-    >
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script>
-        /**
-         * `calculator` is a variable that is an object. The {} brackets denote the variable is an object.
-         * `add`, `subtract` and `multiply` are functions. They are also properties of the `calculator` object.
-         */
-        calculator = {
-            add: function () {
-                // we have a bug here due to JS using "+" for addition and concatonation
-                // see https://www.w3schools.com/js/tryit.asp?filename=tryjs_oper_concat5
-                // and https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat
-                document.forms.inputs.result.value = document.forms.inputs.number1.value + document.forms.inputs.number2.value;
-            },
-            subtract: function () {
-                document.forms.inputs.result.value = parseInt(document.forms.inputs.number1.value) - parseInt(document.forms.inputs.number2.value);
-            },
-            multiply: function () {
-                // @TODO: complete this code so it returns the correct result
-                document.forms.inputs.result.value = "We're working on this feature";
-            }
-        }
-    </script>
+
     <style>
         body {
-            padding: 30px;
+            padding: 10px;
         }
+
         .result {
             padding-top: 20px;
         }
     </style>
 </head>
+
 <body>
     <!-- https://getbootstrap.com/docs/4.0/components/card/ -->
-    <div class="card" style="width: 28rem;">
-        Calculator
+    <div class="card" style="width: 40rem;">
+        Calculator 1
         <div class="card-body">
             <form name="inputs">
                 <div class="container">
                     <div class="form-group">
                         <label>Number 1:</label>
-                        <input
-                            type="number"
-                            name="number1"
-                            class="form-control"
-                            placeholder="Number 1"
-                        >
+                        <input type="number" id="number1" name="number1" class="form-control" placeholder="Number 1">
                         <small class="form-text text-muted">Enter the first number</small>
                     </div>
                     <div class="form-group">
                         <label>Number 2:</label>
-                        <input
-                            type="number"
-                            name="number2"
-                            class="form-control"
-                            placeholder="Number 2"
-                        >
+                        <input type="number" id="number2" class="form-control" placeholder="Number 2">
                         <small class="form-text text-muted">Enter the second number</small>
                     </div>
-                    <div aria-label="Buttons">
-                        <button type="button" class="btn btn-primary" onclick="calculator.add()">add</button>
-                        <button type="button" class="btn btn-primary" onclick="calculator.subtract()">subtract</button>
-                        <button type="button" class="btn btn-secondary" onclick="calculator.multiply()">multiply</button>
-                    </div>
-                    <div class="form-group result">
-                        <label>Result</label>
-                        <input
-                            type="text"
-                            name="result"
-                            class="form-control"
-                            placeholder="Result"
-                            readonly
-                        >
-                    </div>
+                    <div aria-label="Buttons"></div>
+                    <input type="button" class="btn btn-primary" onclick="calc('+')" value="Add" />
+                    <input type="button" class="btn btn-primary" onclick="calc('-')" value="Subtract" />
+                    <input type="button" class="btn btn-primary" onclick="calc('*')" value="Multiply" />
+                    <input type="button" class="btn btn-primary" onclick="calc('/')" value="Divide" />
                 </div>
-            </form>
+                <div class="form-group result">
+                    <label>Result</label>
+                    <input type="text" name="result" id="result" class="form-control" placeholder="Result" readonly>
+                </div>
+        </div>
+        </form>
+
+
+    </div>
+
+    <input type="text" id="num1" value="" size="1" disabled style="border-style: none;" />
+    <input type="text" id="tSign" value="" size="1" disabled style="border-style: none;" />
+    <div class="calculator card">
+        <div>Calculator 2</div>
+        <input type="text" id="num2" class="calculator-screen z-depth-1" value="" disabled />
+
+        <div class="calculator-keys">
+
+            <button type="button" class="operator btn btn-info" onclick="copyNumber('+')" value="+">+</button>
+            <button type="button" class="operator btn btn-info" onclick="copyNumber('-')" value="-">-</button>
+            <button type="button" class="operator btn btn-info" onclick="copyNumber('*')" value="*">&times;</button>
+            <button type="button" class="operator btn btn-info" onclick="copyNumber('/')" value="/">&divide;</button>
+
+            <button type="button" value="7" class="btn btn-light waves-effect" onclick="Insert_calc(7)">7</button>
+            <button type="button" value="8" class="btn btn-light waves-effect" onclick="Insert_calc(8)">8</button>
+            <button type="button" value="9" class="btn btn-light waves-effect" onclick="Insert_calc(9)">9</button>
+
+
+            <button type="button" value="4" class="btn btn-light waves-effect" onclick="Insert_calc(4)">4</button>
+            <button type="button" value="5" class="btn btn-light waves-effect" onclick="Insert_calc(5)">5</button>
+            <button type="button" value="6" class="btn btn-light waves-effect" onclick="Insert_calc(6)">6</button>
+
+
+            <button type="button" value="1" class="btn btn-light waves-effect" onclick="Insert_calc(1)">1</button>
+            <button type="button" value="2" class="btn btn-light waves-effect" onclick="Insert_calc(2)">2</button>
+            <button type="button" value="3" class="btn btn-light waves-effect" onclick="Insert_calc(3)">3</button>
+
+
+            <button type="button" value="0" class="btn btn-light waves-effect" onclick="Insert_calc(0)">0</button>
+            <button type="button" class="decimal function btn btn-secondary" value="." disabled></button>
+            <button type="button" class="all-clear function btn btn-danger btn-sm" onclick="clearAll()"
+                value="all-clear">AC</button>
+
+            <button type="button" class="equal-sign operator btn btn-default" onclick="eCalc()" value="=">=</button>
+
         </div>
     </div>
 </body>
+
 </html>
